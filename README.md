@@ -25,7 +25,7 @@ Most local or lightweight services don't need a full distributed message broker,
 ### From source
 
 ```bash
-git clone https://github.com/<owner>/eventbroker-lite.git
+git clone https://github.com/Axelgustavlindstrom/eventbroker-lite.git
 cd eventbroker-lite
 pip install -e .
 ```

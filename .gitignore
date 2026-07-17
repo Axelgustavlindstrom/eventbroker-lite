@@ -12,6 +12,15 @@ htmlcov/
 .pytest_cache/
 .ruff_cache/
 .DS_Store
+
 # Project agents/docs configs
 AGENTS.md
 CLAUDE.md
+
+# Secrets / keys / local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
