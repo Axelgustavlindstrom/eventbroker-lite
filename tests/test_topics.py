@@ -18,8 +18,16 @@ def test_matches_wildcard() -> None:
     assert not Topic("orders.updated").matches("orders.created")
 
 
+def test_wildcard_matches_any_segment() -> None:
+    assert Topic("orders.created").matches("orders.*")
+    assert Topic("billing.created").matches("billing.*")
+    assert not Topic("orders.updated").matches("billing.*")
+
+
 def test_mismatched_length() -> None:
     assert not Topic("a.b").matches("*")
+    assert Topic("a.b").matches("*.*")
+    assert not Topic("a").matches("*.*")
 
 
 def test_empty_topic_raises() -> None:
