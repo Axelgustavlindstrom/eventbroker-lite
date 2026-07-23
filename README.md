@@ -6,6 +6,8 @@
 
 **EventBroker Lite** is a lightweight, typed, in-process event broker designed for small services, local development, and serverless workflows. It gives you topic-based pub/sub, basic schema validation, middleware hooks, and an optional SQLite-backed event log—without the operational overhead of Kafka, Redis, or RabbitMQ.
 
+Repository: https://github.com/Axelgustavlindstrom/eventbroker-lite
+
 ## About
 
 Most local or lightweight services don't need a full distributed message broker, but they do need clean decoupling. EventBroker Lite fills that gap: a single dependency, deterministic behavior, and developer-friendly APIs. It's built to drop into existing Python projects with minimal ceremony, and it's friendly for tests because events can be inspected in-memory.
@@ -39,17 +41,17 @@ pip install -e .
 
 ```python
 from dataclasses import dataclass
-from eventbroker import EventBroker
+from eventbroker import EventBroker, Event
 
 @dataclass
-class OrderCreated:
+class OrderCreated(Event):
     order_id: str
     amount: float
 
 broker = EventBroker()
 
 @broker.subscribe("orders.created")
-def handle_order(event: OrderCreated):
+def handle_order(event: OrderCreated) -> None:
     print(f"Processing order {event.order_id}: ${event.amount}")
 
 broker.publish("orders.created", OrderCreated(order_id="ORD-1", amount=29.9))
@@ -59,7 +61,7 @@ broker.publish("orders.created", OrderCreated(order_id="ORD-1", amount=29.9))
 
 ```python
 @broker.subscribe("billing.*")
-def on_any_billing(event):
+def on_any_billing(event) -> None:
     print(f"Billing event: {event}")
 ```
 
@@ -72,6 +74,11 @@ def logging_middleware(next, event):
 
 broker.use(logging_middleware)
 ```
+
+## Documentation
+
+- [Usage](./docs/usage.md)
+- [Development Guide](./docs/development.md)
 
 ## Project Structure
 
@@ -103,13 +110,25 @@ EventBroker Lite is configured programmatically. Recommended defaults:
 - Enable `sqlite_history=True` when you need ordered persistence or replay.
 - Wildcard matching is substring glob-style on segments.
 
+## Development
+
+```bash
+git clone https://github.com/Axelgustavlindstrom/eventbroker-lite.git
+cd eventbroker-lite
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+pytest
+ruff check src tests
+```
+
 ## Verification
 
 This project includes a test suite and optional linting.
 
 ```bash
 # Run tests
-pytest
+python -m pytest tests/ -q
 
 # Lint
 ruff check src tests

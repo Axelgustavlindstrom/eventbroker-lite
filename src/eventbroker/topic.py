@@ -30,11 +30,9 @@ class Topic:
         if pattern == "#":
             return True
         target_segments = tuple(pattern.split("."))
-        if len(self._segments) != len(target_segments):
-            return False
         for t, p in zip(self._segments, target_segments):
             if p == "*":
                 continue
             if p != t:
                 return False
-        return True
+        return len(self._segments) == len(target_segments)
