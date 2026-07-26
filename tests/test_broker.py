@@ -75,3 +75,16 @@ def test_history_records_events() -> None:
     assert len(history) == 2
     assert history[0].topic == "x.y"
     assert history[0].payload == 1
+
+
+def test_non_singleton_handler_matches_do_not_share_state() -> None:
+    broker = EventBroker()
+    counter = Counter()
+
+    broker.subscribe("orders.created")(counter.handle)
+    broker.subscribe("orders.updated")(counter.handle)
+
+    broker.publish("orders.created", {})
+    broker.publish("orders.updated", {})
+
+    assert counter.value == 2

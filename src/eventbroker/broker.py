@@ -51,13 +51,9 @@ class EventBroker:
             sub for sub in self._subscriptions if resolved.matches(sub.pattern)
         ]
 
-        for sub in self._subscriptions:
-            resolved = Topic(event.topic)
-            if not resolved.matches(sub.pattern):
-                continue
-            handler = sub.handler
+        for sub in matched:
             try:
-                def _invoke(ev: Event, h: Handler = handler) -> Any:
+                def _invoke(ev: Event, h: Handler = sub.handler) -> Any:
                     return h(ev)
 
                 self._middlewares.execute(_invoke, event)
