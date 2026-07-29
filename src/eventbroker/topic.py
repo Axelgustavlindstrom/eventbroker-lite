@@ -29,10 +29,12 @@ class Topic:
     def matches(self, pattern: str) -> bool:
         if pattern == "#":
             return True
-        target_segments = tuple(pattern.split("."))
-        for t, p in zip(self._segments, target_segments):
-            if p == "*":
+        target = tuple(pattern.split("."))
+        if len(self._segments) != len(target):
+            return False
+        for topic_segment, pattern_segment in zip(self._segments, target):
+            if pattern_segment == "*":
                 continue
-            if p != t:
+            if topic_segment != pattern_segment:
                 return False
-        return len(self._segments) == len(target_segments)
+        return True
