@@ -24,6 +24,9 @@ dependencies = []
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "ruff>=0.4"]
 
+[project.urls]
+Repository = "https://github.com/Axelgustavlindstrom/eventbroker-lite"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"

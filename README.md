@@ -99,16 +99,9 @@ eventbroker-lite/
 │   ├── test_topics.py
 │   └── test_middleware.py
 └── docs/
-└── usage.md
+    ├── usage.md
+    └── development.md
 ```
-
-## Configuration
-
-EventBroker Lite is configured programmatically. Recommended defaults:
-
-- Use in-memory broker for tests and short-lived processes.
-- Enable `sqlite_history=True` when you need ordered persistence or replay.
-- Wildcard matching is substring glob-style on segments.
 
 ## Development
 

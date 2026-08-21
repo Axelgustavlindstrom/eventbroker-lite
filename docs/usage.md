@@ -1,4 +1,4 @@
-# EventBroker Lite
+# Usage
 
 This document describes when and how to use EventBroker Lite.
 
@@ -12,4 +12,4 @@ This document describes when and how to use EventBroker Lite.
 
 - In-process only; not distributed across processes or hosts
 - Topic patterns match single-segment wildcards (`*`) only
-- No guaranteed delivery semantics; history is a debugging aid
+- No guaranteed delivery semantics; history is an in-memory debugging aid

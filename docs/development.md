@@ -4,8 +4,7 @@ This guide covers local development workflows for EventBroker Lite.
 
 ## Setup
 
-Clone the repository and install the package in editable mode with development
-dependencies:
+Clone the repository and install the package in editable mode with development dependencies:
 
 ```bash
 git clone https://github.com/Axelgustavlindstrom/eventbroker-lite.git
@@ -25,11 +24,9 @@ pytest
 
 ```bash
 ruff check src tests
-mypy src
 ```
 
-If `mypy` is unavailable, `ruff check src tests` provides fast static linting
-without additional setup.
+If `mypy` is unavailable, `ruff check src tests` provides fast static linting without additional setup.
 
 ## Make a change
 
