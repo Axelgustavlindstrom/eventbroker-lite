@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-stable-green)
 
-**EventBroker Lite** is a lightweight, typed, in-process event broker designed for small services, local development, and serverless workflows. It gives you topic-based pub/sub, basic schema validation, middleware hooks, and an optional SQLite-backed event log—without the operational overhead of Kafka, Redis, or RabbitMQ.
+**EventBroker Lite** is a lightweight, typed, in-process event broker designed for small services, local development, and serverless workflows. It gives you topic-based pub/sub, basic schema validation, middleware hooks, and an event log without the operational overhead of Kafka, Redis, or RabbitMQ.
 
 Repository: https://github.com/Axelgustavlindstrom/eventbroker-lite
 
@@ -17,7 +17,6 @@ Most local or lightweight services don't need a full distributed message broker,
 - Topic-based publish/subscribe with wildcard support (`orders.*`, `billing.created`)
 - Type-safe payloads via `@dataclass` and runtime validation
 - Event middleware / interceptors for logging, validation, or tracing
-- Optional SQLite-backed "event bus" persistence for replay or debugging
 - Dead-letter / failed handler support
 - Synchronous and asynchronous handlers
 - Full type annotations and small API surface
@@ -35,7 +34,7 @@ pip install -e .
 ### Requirements
 
 - Python 3.11 or newer
-- No mandatory external services. Optional SQLite persistence uses the Python standard library.
+- No mandatory external services.
 
 ## Quick Start
 
@@ -89,6 +88,7 @@ eventbroker-lite/
 ├── src/
 │   └── eventbroker/
 │   ├── __init__.py
+│   ├── __main__.py
 │   ├── broker.py
 │   ├── topic.py
 │   ├── events.py
