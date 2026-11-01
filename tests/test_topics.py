@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import pytest
+
 from eventbroker.topic import Topic
+
+
 def test_topic_segments() -> None:
     t = Topic("a.b.c")
     assert t.segments == ("a", "b", "c")

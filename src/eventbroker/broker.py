@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 
 from .events import Event
 from .exceptions import PublishError, SubscriptionError
@@ -58,7 +59,7 @@ class EventBroker:
 
                 self._middlewares.execute(_invoke, event)
             except Exception:
-                logger.exception("Failed to handle event", exc_info=True)
+                logger.exception("Failed to handle event")
                 raise PublishError(f"Handler failed for topic {topic}")
 
         self._history.append(event)
